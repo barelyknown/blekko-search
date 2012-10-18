@@ -1,0 +1,50 @@
+# gitignore tips and tricks from https://github.com/github/gitignore
+
+# Ignore bundler config
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# https://github.com/github/gitignore/blob/master/Ruby.gitignore
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# https://github.com/github/gitignore/blob/master/Global/TextMate.gitignore
+*.tmproj
+*.tmproject
+tmtags
