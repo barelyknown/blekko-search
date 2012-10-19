@@ -44,7 +44,7 @@ Blekko allows for a maximum of 100 results per search, but if you'd like more, y
 
 By default, the searches will be made 100 results at a time, but you can reduce the page size using the ``:page_size`` argument too.
 
-Blekko asks that users of its API limit searches to one per second. This gem doesn't include that, but you may want to implement that feature (or send a pull request) especially if you are multithreading the search.
+Blekko requests that users of its API throttle searches to one per second. Use one ``Blekko`` instance with the default settings for all searching and slashtag management and that throttling will be taken care of for you.
 
 #### Results
 Each result includes the attributes that blekko provides, plus a couple more:
