@@ -1,7 +1,9 @@
+require 'cgi'
+require 'open-uri'
+require 'json'
+require 'net/http'
 require "blekko-search/version"
-
-module Blekko
-  module Search
-    # Your code goes here...
-  end
-end
+require "blekko-search/blekko"
+require "blekko-search/search"
+require "blekko-search/search_result"
+require "blekko-search/slashtag"

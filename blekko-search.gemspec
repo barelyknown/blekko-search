@@ -5,7 +5,7 @@ require 'blekko-search/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "blekko-search"
-  gem.version       = Blekko::Search::VERSION
+  gem.version       = BlekkoSearch::VERSION
   gem.authors       = ["Sean Devine"]
   gem.email         = ["barelyknown@icloud.com"]
   gem.description   = %q(Search and manage slashtags for blekko.com)
