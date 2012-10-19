@@ -44,7 +44,7 @@ Blekko allows for a maximum of 100 results per search, but if you'd like more, y
 
 By default, the searches will be made 100 results at a time, but you can reduce the page size using the ``:page_size`` argument too.
 
-Blekko requests that users of its API throttle searches to one per second. Use one ``Blekko`` instance with the default settings for all searching and slashtag management and that throttling will be taken care of for you.
+Blekko requests that users of its API throttle searches to one per second. All ``Blekko`` instances that share an API key will have their requests throttled through the same queuee.
 
 #### Results
 Each result includes the attributes that blekko provides, plus a couple more:
