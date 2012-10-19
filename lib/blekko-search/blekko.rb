@@ -3,9 +3,15 @@ class Blekko
   DEFAULT_MAX_FREQUENCY_PER_SECOND = 1
   SECURE_PROTOCOL = "https://"
   NON_SECURE_PROTOCOL = "http://"
+  
+  class << self
+    attr_accessor :last_request_at
+    def last_request_at
+      @last_request_at ||= {}
+    end
+  end
       
-  attr_accessor :protocol, :api_key, :max_frequency_per_second, :username, :password, :login_cookie,
-  :last_request_at
+  attr_accessor :protocol, :api_key, :max_frequency_per_second, :username, :password, :login_cookie
       
   def initialize(args={})
     @api_key = args[:api_key]
@@ -57,6 +63,14 @@ class Blekko
     1 / max_frequency_per_second.to_f
   end
   
+  def last_request_at
+    self.class.last_request_at[api_key]
+  end
+  
+  def last_request_at=(value)
+    self.class.last_request_at[api_key] = value
+  end
+  
   def earliest_next_request
     last_request_at ? last_request_at + delay_between_requests : Time.now
   end
@@ -64,6 +78,5 @@ class Blekko
   def seconds_until_next_request
     [earliest_next_request - Time.now, 0].max
   end
-  
-  
+    
 end
