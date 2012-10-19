@@ -52,15 +52,15 @@ class Blekko
     
     
     def save_url(method, target_urls=urls)
-      "https://" + blekko.host + "/tag/add?name=#{name}&submit=#{method}&urls=#{urls.join("%0A")}&auth=#{blekko.api_key}"
+      blekko.protocol + blekko.host + "/tag/add?name=#{name}&submit=#{method}&urls=#{urls.join("%0A")}&auth=#{blekko.api_key}"
     end
     
     def remove_url(target_urls)
-      "https://" + blekko.host + "/tag/edit?submit=1&type=del&name=#{name}&urls=#{target_urls.join("%0A")}&auth=#{blekko.api_key}"
+      blekko.protocol + blekko.host + "/tag/edit?submit=1&type=del&name=#{name}&urls=#{target_urls.join("%0A")}&auth=#{blekko.api_key}"
     end
     
     def delete_url
-      "https://blekko.com/tag/delete?submit=1&name=#{name}&auth=#{blekko.api_key}"
+      blekko.protocol + blekko.host + "/tag/delete?submit=1&name=#{name}&auth=#{blekko.api_key}"
     end
     
     def delete!

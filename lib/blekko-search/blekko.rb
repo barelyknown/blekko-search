@@ -1,12 +1,14 @@
 class Blekko
-  HOST = "www.blekko.com"
+  HOST = "blekko.com"
   DEFAULT_MAX_FREQUENCY_PER_SECOND = 1
+  SECURE_PROTOCOL = "https://"
+  NON_SECURE_PROTOCOL = "http://"
       
   attr_accessor :protocol, :api_key, :max_frequency_per_second, :username, :password, :login_cookie
       
   def initialize(args={})
     @api_key = args[:api_key]
-    @protocol = args[:secure] ? "https://" : "http://"
+    @protocol = args[:secure] ? SECURE_PROTOCOL : NON_SECURE_PROTOCOL
     @username = args[:username]
     @password = args[:password]
     @max_frequency_per_second = args[:max_frequency_per_second] || DEFAULT_MAX_FREQUENCY_PER_SECOND
@@ -26,7 +28,7 @@ class Blekko
   end
   
   def login_uri
-    URI("https://blekko.com/login?u=#{CGI.escape(username)}&p=#{CGI.escape(password)}&auth=#{api_key}")
+    URI("#{SECURE_PROTOCOL}#{HOST}/login?u=#{CGI.escape(username)}&p=#{CGI.escape(password)}&auth=#{api_key}")
   end
   
   def headers
