@@ -40,7 +40,7 @@ class Blekko
     end
     
     def escaped_query
-      CGI.escape(query + " ") + @slashtags.join("+") + "+"
+      CGI.escape(query + " ") + @slashtags.collect { |s| CGI.escape(s) }.join("+") + "+"
     end
         
     def page_size_param
