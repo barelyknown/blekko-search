@@ -48,7 +48,7 @@ class Blekko
     end
     
     def page_number_param(page_number)
-      "p=#{page_number}"
+      "p=#{page_number}" if page_number > 0
     end
     
     def auth_param
