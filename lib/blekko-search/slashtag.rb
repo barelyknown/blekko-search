@@ -8,7 +8,7 @@ class Blekko
       @blekko = blekko
       @name = name
       @urls = *args[:urls]
-      if args[:eager_load] && !@urls
+      if args[:eager_load] && urls.empty?
         self.urls = saved_urls
       end
     end

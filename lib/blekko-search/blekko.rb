@@ -31,7 +31,7 @@ class Blekko
   
   def headers
     { 
-      "Cookie" => "A=AfGTtGoSio7Hnc1xiaSrwkJX4ggMfcFiBXufPUPQXZvB5TRe36Q6tPI4woK6SKO8%2Bh8qeD7z0qEk%2B4Ceg5N9HA95UTpznKUvuuEfb04GiwhAlKARpLnp18%2BI6EYQfes1PB0QNnhHwEAC3kLjyJqCZbsxVw8ud4Z6F%2Fbg6BvJj28L;",
+      "Cookie" => login_cookie,
       "User-Agent" => "Ruby"
     }
   end
