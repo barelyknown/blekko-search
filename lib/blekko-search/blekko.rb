@@ -4,7 +4,8 @@ class Blekko
   SECURE_PROTOCOL = "https://"
   NON_SECURE_PROTOCOL = "http://"
       
-  attr_accessor :protocol, :api_key, :max_frequency_per_second, :username, :password, :login_cookie
+  attr_accessor :protocol, :api_key, :max_frequency_per_second, :username, :password, :login_cookie,
+  :last_request_at
       
   def initialize(args={})
     @api_key = args[:api_key]
@@ -27,6 +28,12 @@ class Blekko
     Blekko::Slashtag.new(self, name, args)
   end
   
+  def request(url)
+    sleep(seconds_until_next_request)
+    self.last_request_at = Time.now
+    open(url, headers)
+  end
+  
   def login_uri
     URI("#{SECURE_PROTOCOL}#{HOST}/login?u=#{CGI.escape(username)}&p=#{CGI.escape(password)}&auth=#{api_key}")
   end
@@ -44,6 +51,18 @@ class Blekko
       response = http.request Net::HTTP::Get.new login_uri.request_uri
       self.login_cookie = response.get_fields('Set-Cookie').find { |c| c =~ /\AA=/ }
     end
+  end
+  
+  def delay_between_requests
+    1 / max_frequency_per_second.to_f
+  end
+  
+  def earliest_next_request
+    last_request_at ? last_request_at + delay_between_requests : Time.now
+  end
+  
+  def seconds_until_next_request
+    [earliest_next_request - Time.now, 0].max
   end
   
   

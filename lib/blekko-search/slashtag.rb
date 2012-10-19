@@ -37,19 +37,18 @@ class Blekko
     end
     
     def remove_urls!(target_urls)
-      open(remove_url(target_urls), blekko.headers)
+      blekko.request(remove_url(target_urls))
       true
     end
 
     
     def create!
-      open(save_url("create"), blekko.headers)
+      blekko.request(save_url("create"))
     end
     
     def update!
-      open(save_url("update"), blekko.headers)      
+      blekko.request(save_url("update"))      
     end
-    
     
     def save_url(method, target_urls=urls)
       blekko.protocol + blekko.host + "/tag/add?name=#{name}&submit=#{method}&urls=#{urls.join("%0A")}&auth=#{blekko.api_key}"
@@ -65,7 +64,7 @@ class Blekko
     
     def delete!
       return ArgumentError, "This is not implemented by blekko yet"
-      open(delete_url, blekko.headers)
+      blekko.reqeust(delete_url)
     end
         
   end
