@@ -32,7 +32,7 @@ class Blekko
   def headers
     { 
       "Cookie" => login_cookie,
-      "User-Agent" => "Ruby"
+      "User-Agent" => "blekko-search-#{BlekkoSearch::VERSION}"
     }
   end
   

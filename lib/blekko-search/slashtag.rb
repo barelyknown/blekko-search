@@ -19,7 +19,7 @@ class Blekko
     
     def saved_urls
       url = blekko.protocol + blekko.host + "/tag/view?name=" + CGI.escape(name) + "&format=text&auth=#{blekko.api_key}"
-      lines = open(url).collect { |line| line.strip }
+      lines = open(url, blekko.headers).collect { |line| line.strip }
       unless lines.first.scan(" ").any?
         lines.collect { |line| line }
       end

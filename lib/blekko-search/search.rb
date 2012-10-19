@@ -6,7 +6,7 @@ class Blekko
     PREFIX = "/ws/?q="
     RESPONSE_FORMAT = "/json+/"
     
-    attr_accessor :query, :slashtags, :results
+    attr_accessor :query, :slashtags, :results, :blekko
     
     def initialize(blekko, query, args={})
       args = {page_size: DEFAULT_PAGE_SIZE }.merge(args)
@@ -24,7 +24,7 @@ class Blekko
     def search
       page_number = 0
       number_of_searches.times do
-        response = JSON.load(open(url(page_number)))
+        response = JSON.load(open(url(page_number), blekko.headers))
         if response['RESULT']
           self.results += response['RESULT'].collect { |r| Blekko::SearchResult.new(r) }
         else
@@ -52,7 +52,7 @@ class Blekko
     end
     
     def auth_param
-      @blekko.api_key ? "auth=#{@blekko.api_key}" : nil
+      blekko.api_key ? "auth=#{blekko.api_key}" : nil
     end
     
     def params(page_number)
@@ -60,7 +60,7 @@ class Blekko
     end
     
     def url(page_number)
-      @blekko.protocol + @blekko.host + PREFIX + escaped_query + RESPONSE_FORMAT + params(page_number)
+      blekko.protocol + blekko.host + PREFIX + escaped_query + RESPONSE_FORMAT + params(page_number)
     end
         
   end
