@@ -4,6 +4,8 @@ Search the Internet (or parts of the Internet!) with ease. This gem is powered b
 
 This gem is based on work done on [earmarkd.com](http://www.earmarkd.com) during [RailsRumble 2012](http://railsrumble.com).
 
+For an example of what's possible, check out [Daring Firesearch](http://daringfiresearch.net), a search engine tribute to John Gruber's [Daring Fireball](http://daringfireball.net).
+
 ## Installation
 
 Add this line to your application's ``Gemfile``:
