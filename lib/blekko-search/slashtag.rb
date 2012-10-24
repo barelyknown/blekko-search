@@ -36,7 +36,7 @@ class Blekko
       end
     end
     
-    def remove_urls!(target_urls)
+    def remove_urls!(*target_urls)
       blekko.request(remove_url(target_urls))
       true
     end
