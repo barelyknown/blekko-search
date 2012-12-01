@@ -11,7 +11,7 @@ class Blekko
     end
   end
       
-  attr_accessor :protocol, :api_key, :max_frequency_per_second, :username, :password, :login_cookie
+  attr_accessor :protocol, :api_key, :max_frequency_per_second, :username, :password, :login_cookie, :headers
       
   def initialize(args={})
     @api_key = args[:api_key]
@@ -45,10 +45,7 @@ class Blekko
   end
   
   def headers
-    { 
-      "Cookie" => login_cookie,
-      "User-Agent" => "blekko-search-#{BlekkoSearch::VERSION}"
-    }
+    @headers ||= {}
   end
   
   def login
@@ -56,6 +53,8 @@ class Blekko
     Net::HTTP.start(login_uri.host, login_uri.port, use_ssl: true) do |http|
       response = http.request Net::HTTP::Get.new login_uri.request_uri
       self.login_cookie = response.get_fields('Set-Cookie').find { |c| c =~ /\AA=/ }
+      headers["Cookie"] = login_cookie
+      headers["User-Agent"] = "blekko-search-#{BlekkoSearch::VERSION}"
     end
   end
   
