@@ -30,6 +30,10 @@ class Blekko
     Blekko::Search.new(self, query, args).search
   end
 
+  def web_url(query)
+    Blekko::Search.new(self, query).web_url
+  end
+
   def slashtag(name, args={})
     Blekko::Slashtag.new(self, name, args)
   end
