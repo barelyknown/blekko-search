@@ -38,10 +38,18 @@ class Blekko
     Blekko::Slashtag.new(self, name, args)
   end
 
-  def request(url)
+  def http_class
+    BlekkoSearch.http_class || Net::HTTP
+  end
+
+  def request(path)
     sleep(seconds_until_next_request)
     self.last_request_at = Time.now
-    open(url, headers)
+    http_class.start("blekko.com", 80) do |http|
+      request = Net::HTTP::Get.new path
+      headers.each { |key, value| request[key] = value }
+      http.request(request).body
+    end
   end
 
   def login_uri

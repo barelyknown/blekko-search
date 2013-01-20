@@ -24,7 +24,7 @@ class Blekko
     def search
       page_number = 0
       number_of_searches.times do
-        response = JSON.load(blekko.request(url(page_number)))
+        response = JSON.load(blekko.request(path(page_number)))
         if response['RESULT']
           self.results += response['RESULT'].collect { |r| Blekko::SearchResult.new(r) }
         else
@@ -60,7 +60,11 @@ class Blekko
     end
 
     def url(page_number)
-      blekko.protocol + blekko.host + PREFIX + escaped_query + RESPONSE_FORMAT + params(page_number)
+      blekko.protocol + blekko.host + path(page_number)
+    end
+
+    def path(page_number)
+      PREFIX + escaped_query + RESPONSE_FORMAT + params(page_number)
     end
 
     def web_url
